@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8-Month AI/ML Roadmap — Abhishek</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --border: #2a2a2a;
+    --border2: #333;
+    --text: #e8e6e0;
+    --muted: #888;
+    --hint: #555;
+    --purple: #7f77dd;
+    --purple-dim: #3c3489;
+    --purple-bg: #1a1830;
+    --teal: #1d9e75;
+    --teal-bg: #0d2820;
+    --amber: #ef9f27;
+    --amber-bg: #231800;
+    --coral: #d85a30;
+    --coral-bg: #231208;
+    --blue: #378add;
+    --blue-bg: #0d1e30;
+    --pink: #d4537e;
+    --pink-bg: #230d18;
+    --green: #639922;
+    --green-bg: #121e06;
+    --gray: #888780;
+    --gray-bg: #1a1a18;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 52px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-right: auto;
+  }
+  .month-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 4px 0;
+  }
+  .month-tabs::-webkit-scrollbar { display: none; }
+  .mtab {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .mtab:hover { color: var(--text); border-color: var(--hint); }
+  .mtab.active { border-color: transparent; color: #fff; }
+
+  /* HERO */
+  .hero {
+    padding: 4rem 1.5rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .chip {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+  }
+  .chip.accent {
+    border-color: var(--purple-dim);
+    color: var(--purple);
+    background: var(--purple-bg);
+  }
+  .profile-tracker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .profile-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .profile-select,
+  .profile-input,
+  .profile-add {
+    min-height: 34px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    background: var(--bg2);
+    color: var(--text);
+    font: inherit;
+    font-size: 12px;
+  }
+  .profile-select,
+  .profile-input { padding: 6px 10px; }
+  .profile-input { width: 150px; }
+  .profile-add {
+    padding: 6px 12px;
+    color: var(--purple);
+    border-color: var(--purple-dim);
+    background: var(--purple-bg);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .profile-add:hover { border-color: var(--purple); }
+  .profile-select:focus-visible,
+  .profile-input:focus-visible,
+  .profile-add:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+  }
+  .progress-bar-wrap {
+    background: var(--bg3);
+    border-radius: 4px;
+    height: 4px;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--purple), var(--teal));
+    width: 0%;
+    transition: width 1s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--hint);
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* MONTH CARD */
+  .month-card {
+    display: none;
+  }
+  .month-card.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .month-header {
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid;
+  }
+  .month-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    opacity: 0.7;
+  }
+  .month-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .month-goal {
+    font-size: 14px;
+    line-height: 1.65;
+    opacity: 0.75;
+    margin-bottom: 1rem;
+  }
+  .month-project-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.3rem;
+  }
+  .month-project {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid;
+    display: inline-block;
+    line-height: 1.5;
+  }
+
+  /* WEEK */
+  .week-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+  }
+  .week-header:hover { background: var(--bg2); }
+  .week-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .week-label {
+    font-size: 13px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .week-theme {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .week-chev {
+    font-size: 10px;
+    color: var(--hint);
+    transition: transform 0.2s;
+  }
+  .week-chev.open { transform: rotate(90deg); }
+  .week-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+  .week-body.open { display: block; }
+
+  /* DAY ROW */
+  .day-row {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-label {
+    padding: 0.75rem 0.6rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--hint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-right: 1px solid var(--border);
+    background: var(--bg2);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.85rem;
+  }
+  .day-content {
+    padding: 0.75rem 1rem;
+  }
+  .day-content-inner {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .topic-check {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 1px solid var(--border2);
+    border-radius: 5px;
+    background: var(--bg3);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .topic-check::before {
+    content: '';
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) scale(0);
+    transition: transform 0.12s ease;
+  }
+  .topic-check:hover { transform: scale(1.06); }
+  .topic-check:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+  }
+  .topic-check:checked {
+    background: var(--topic-color);
+    border-color: var(--topic-color);
+  }
+  .topic-check:checked::before { transform: rotate(-45deg) scale(1); }
+  .day-row.completed .day-topic {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .day-row.completed .day-detail,
+  .day-row.completed .day-time {
+    opacity: 0.55;
+  }
+  .day-topic {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .day-detail {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 4px;
+  }
+  .day-time {
+    font-size: 11px;
+    color: var(--hint);
+    font-style: italic;
+  }
+  .rest-row {
+    padding: 0.5rem 1rem;
+    font-size: 11px;
+    color: var(--hint);
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--hint);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 2.5rem 1rem 2rem; }
+    .main { padding: 0 1rem 3rem; }
+    nav { padding: 0 1rem; }
+    .week-theme { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">AI/ML Roadmap</span>
+  <div class="month-tabs" id="tabs"></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">8-month plan · internship target</div>
+  <h1 class="hero-title">From Python to<br><span>AI Engineer</span></h1>
+  <p class="hero-sub">Daily topic-wise breakdown. 4–5 hours per day. One deployed project every month. Goal: first AI internship by Month 7–8.</p>
+  <div class="hero-chips">
+    <span class="chip accent">8 months</span>
+    <span class="chip">240 days</span>
+    <span class="chip">8 projects</span>
+    <span class="chip">4–5 hrs/day</span>
+    <span class="chip">Internship ready</span>
+  </div>
+  <div class="profile-tracker">
+    <label class="profile-label" for="profile-select">User</label>
+    <select class="profile-select" id="profile-select" aria-label="Select user profile"></select>
+    <input class="profile-input" id="profile-name" type="text" maxlength="30" placeholder="New user name">
+    <button class="profile-add" id="profile-add" type="button">Add user</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label">Click a month tab to track progress</div>
+</div>
+
+<div class="main" id="main"></div>
+
+<footer>
+  Built for Abhishek · DSEU Diploma → AI/ML Engineer · Target: AI Internship 2026–27
+</footer>
+
+<script>
+const MONTHS_META = [
+  { color: '#7f77dd', bg: '#1a1830', border: '#3c3489' },
+  { color: '#1d9e75', bg: '#0d2820', border: '#0f6e56' },
+  { color: '#ef9f27', bg: '#231800', border: '#854f0b' },
+  { color: '#d85a30', bg: '#231208', border: '#993c1d' },
+  { color: '#378add', bg: '#0d1e30', border: '#185fa5' },
+  { color: '#d4537e', bg: '#230d18', border: '#993556' },
+  { color: '#639922', bg: '#121e06', border: '#3b6d11' },
+  { color: '#888780', bg: '#1a1a18', border: '#5f5e5a' },
+];
+
+const months = [
+  {
+    title: 'Python for AI',
+    goal: 'Syntax jaanti hai, ab AI ke liye sochna seekhna hai. NumPy/Pandas solidify karo. Har concept ke saath chhota sa script banana compulsory hai.',
+    project: 'Project: Data analysis script — CSV load, clean, 5 insights nikalo, matplotlib se visualize karo. GitHub pe push karo.',
+    weeks: [
+      { label: 'Week 1', theme: 'NumPy deep dive', days: [
+        { d: 'Mon', topic: 'NumPy arrays deep dive', detail: 'ndarray, dtype, shape, reshape, broadcasting rules', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'NumPy operations', detail: 'Vectorized ops, slicing, boolean indexing, np.where', time: '1hr review + 3hr problems' },
+        { d: 'Wed', topic: 'NumPy — linear algebra', detail: 'dot product, matrix multiply, np.linalg basics. ML mein daily use hoga.', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Pandas Series & DataFrame', detail: 'create, index, loc/iloc, basic filtering', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'Pandas — data cleaning', detail: 'null handling, fillna, dropna, duplicates, dtype conversion', time: '1hr + 3hr real dataset practice' },
+        { d: 'Sat', topic: 'Pandas — groupby & merge', detail: 'groupby, agg, pivot_table, merge/join types', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 2', theme: 'Visualization + EDA', days: [
+        { d: 'Mon', topic: 'Pandas — time series basics', detail: 'datetime index, resample, rolling, shift', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Matplotlib fundamentals', detail: 'figure/axes, line/bar/scatter/hist, subplots, labels', time: '2hr theory + 2hr practice' },
+        { d: 'Wed', topic: 'Seaborn for EDA', detail: 'heatmap, pairplot, boxplot, distplot. EDA workflow samjho.', time: '1.5hr + 2.5hr practice' },
+        { d: 'Thu', topic: 'EDA mini project — Day 1', detail: 'Kaggle Titanic dataset. Load, explore, 10 questions poochho data se.', time: '4–5hr project' },
+        { d: 'Fri', topic: 'EDA mini project — Day 2', detail: 'Visualize answers, clean data, write observations', time: '4–5hr project' },
+        { d: 'Sat', topic: 'Review + Git setup', detail: 'Push project to GitHub. README likho. Portfolio entry #1.', time: '2hr review + 2hr git' },
+      ]},
+      { label: 'Week 3', theme: 'Statistics for ML', days: [
+        { d: 'Mon', topic: 'Descriptive stats', detail: 'mean, median, mode, variance, std dev — numpy se calculate karo, formula mat ratto', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Probability basics', detail: 'probability, conditional probability, Bayes theorem. ML mein yeh foundation hai.', time: '2hr theory + 1hr problems' },
+        { d: 'Wed', topic: 'Distributions', detail: 'normal, binomial, Poisson. scipy.stats se plot karo. Intuition build karo.', time: '2hr + 2hr code' },
+        { d: 'Thu', topic: 'Hypothesis testing', detail: 'p-value, t-test, chi-square. Kab use karte hain, kaise interpret karte hain.', time: '2hr theory + 2hr practice' },
+        { d: 'Fri', topic: 'Correlation & covariance', detail: 'Pearson, Spearman. Why high correlation ≠ causation.', time: '1.5hr + 2hr practice' },
+        { d: 'Sat', topic: 'Stats mini project', detail: 'Real dataset pe full statistical analysis. Jupyter notebook mein.', time: '4–5hr project' },
+      ]},
+      { label: 'Week 4', theme: 'OOP + Month project', days: [
+        { d: 'Mon', topic: 'OOP for ML', detail: 'class, __init__, self, inheritance. Sirf itna — sklearn ke classes samajhne ke liye.', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'File handling + APIs', detail: 'CSV/JSON read-write, requests library, basic REST API call', time: '2hr + 2hr practice' },
+        { d: 'Wed', topic: 'Month project — Day 1', detail: 'Full data analysis project: load dataset, clean, EDA, stats, visualize', time: '4–5hr project' },
+        { d: 'Thu', topic: 'Month project — Day 2', detail: 'Insights document likho, GitHub pe push karo, README polish karo', time: '4–5hr project' },
+        { d: 'Fri', topic: 'Month 1 revision', detail: 'Sabse weak topic dobara karo. NumPy broadcasting? Pandas merge? Stats?', time: '4hr focused revision' },
+        { d: 'Sat', topic: 'Next month preview + setup', detail: 'sklearn install, Jupyter setup, Month 2 ka overview padho', time: '2hr' },
+      ]},
+    ]
+  },
+  {
+    title: 'ML Fundamentals',
+    goal: 'Sklearn se ML models banana seekho. Theory + implementation dono. "Model train kiya" se aage "kyun kiya" samajhna zaroori hai.',
+    project: 'Project: House price predictor — full pipeline, feature engineering, 3 model comparison, GitHub deploy.',
+    weeks: [
+      { label: 'Week 5', theme: 'Regression', days: [
+        { d: 'Mon', topic: 'ML workflow overview', detail: 'Data → Features → Train → Evaluate → Improve. Yeh cycle dimag mein pakka karo.', time: '2hr theory + 1hr code' },
+        { d: 'Tue', topic: 'Linear regression — math', detail: 'cost function, gradient descent intuition, MSE. Paper pe likho pehle.', time: '2hr theory + 2hr derivation' },
+        { d: 'Wed', topic: 'Linear regression — sklearn', detail: 'LinearRegression, train_test_split, fit/predict/score. Housing dataset.', time: '1hr + 3hr code' },
+        { d: 'Thu', topic: 'Feature engineering', detail: 'normalization, standardization, one-hot encoding, feature selection basics', time: '2hr theory + 2hr practice' },
+        { d: 'Fri', topic: 'Polynomial regression', detail: 'PolynomialFeatures, overfitting vs underfitting — visually dekho', time: '2hr + 2hr code' },
+        { d: 'Sat', topic: 'Ridge & Lasso', detail: 'Regularization kyun zaroori hai. L1 vs L2 difference. Cross-validation.', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 6', theme: 'Classification', days: [
+        { d: 'Mon', topic: 'Logistic regression', detail: 'sigmoid function, binary classification, decision boundary. Math + code dono.', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Evaluation metrics', detail: 'accuracy, precision, recall, F1, confusion matrix, ROC-AUC. Kab kaunsa use karo.', time: '2hr theory + 2hr practice' },
+        { d: 'Wed', topic: 'Decision Trees', detail: 'information gain, entropy, gini. sklearn ka DecisionTreeClassifier.', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Random Forest', detail: 'bagging, feature importance, hyperparameters. Decision tree se kyun better hai.', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'SVM basics', detail: 'hyperplane, margin, kernel trick intuition. Dense math mat jaao — concept samjho.', time: '2hr theory + 1.5hr code' },
+        { d: 'Sat', topic: 'Classification project', detail: 'Spam detection — full pipeline, eval metrics, compare 3 models', time: '4–5hr project' },
+      ]},
+      { label: 'Week 7', theme: 'Unsupervised + Tuning', days: [
+        { d: 'Mon', topic: 'K-Means clustering', detail: 'algorithm, elbow method, inertia. Real use case: customer segmentation.', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'PCA', detail: 'dimensionality reduction, explained variance, visualization. When to use.', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Hyperparameter tuning', detail: 'GridSearchCV, RandomizedSearchCV, cross-validation properly', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Pipeline in sklearn', detail: 'Pipeline class, ColumnTransformer. Production-ready code likhna seekho.', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'ML debugging', detail: 'learning curves, validation curves, bias-variance tradeoff practically samjho', time: '3hr theory + 2hr practice' },
+        { d: 'Sat', topic: 'XGBoost introduction', detail: 'Gradient boosting intuition, XGBoost vs Random Forest, basic params', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 8', theme: 'Month project + DL preview', days: [
+        { d: 'Mon', topic: 'House price project — Day 1', detail: 'Kaggle housing dataset. EDA + feature engineering + baseline model.', time: '4–5hr project' },
+        { d: 'Tue', topic: 'House price project — Day 2', detail: 'Model comparison (LR, RF, XGBoost), tuning, eval', time: '4–5hr project' },
+        { d: 'Wed', topic: 'House price project — Day 3', detail: 'Prediction script finalize, README, GitHub push. Portfolio #2.', time: '4hr project + 1hr docs' },
+        { d: 'Thu', topic: 'Month 2 revision', detail: 'Weakest concept revisit. Most likely: regularization ya evaluation metrics.', time: '4hr revision' },
+        { d: 'Fri', topic: 'Deep learning preview', detail: 'Neural network intuition — neurons, layers, activation. Watch 3Blue1Brown.', time: '2hr conceptual' },
+        { d: 'Sat', topic: 'Environment setup', detail: 'PyTorch install, CUDA check, GPU test (agar GPU hai toh)', time: '2hr setup' },
+      ]},
+    ]
+  },
+  {
+    title: 'Deep Learning Foundations',
+    goal: 'Neural networks samajhna — sirf keras.fit() nahi, andar kya ho raha hai woh bhi. Backprop, activation functions, loss functions — sab clear hona chahiye.',
+    project: 'Project: Image classifier (CIFAR-10) — custom CNN, 85%+ accuracy, training curves, model saved + deployed.',
+    weeks: [
+      { label: 'Week 9', theme: 'NN from scratch', days: [
+        { d: 'Mon', topic: 'Perceptron & feedforward NN', detail: 'neuron model, weights, bias, forward pass. NumPy se scratch mein banao.', time: '2hr theory + 3hr code' },
+        { d: 'Tue', topic: 'Activation functions', detail: 'sigmoid, tanh, ReLU, leaky ReLU — kab kaunsa, kyun. Plot karo sab.', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Loss functions', detail: 'MSE, cross-entropy, binary CE. Math samjho — formula yaad mat karo.', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Backpropagation — math', detail: 'chain rule, gradient flow. Paper pe manually ek example calculate karo.', time: '3hr — slow down here' },
+        { d: 'Fri', topic: 'Backprop — code', detail: 'NumPy se implement karo simple 2-layer NN. No keras yet.', time: '4hr code' },
+        { d: 'Sat', topic: 'Optimizers', detail: 'SGD, momentum, Adam, RMSprop. Why Adam is default choice.', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 10', theme: 'PyTorch basics', days: [
+        { d: 'Mon', topic: 'PyTorch tensors', detail: 'tensor operations, autograd, requires_grad. NumPy vs PyTorch comparison.', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'PyTorch nn.Module', detail: 'Linear, forward method, model architecture define karna', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Training loop in PyTorch', detail: 'DataLoader, optimizer, loss, backward, step. Yeh loop 100 baar likhoge.', time: '2hr + 3hr code' },
+        { d: 'Thu', topic: 'Regularization techniques', detail: 'Dropout, BatchNorm, weight decay. Overfitting rokne ke tarike.', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'PyTorch project — MNIST', detail: 'Digit classifier. 99%+ accuracy target. Full PyTorch pipeline.', time: '4–5hr project' },
+        { d: 'Sat', topic: 'Model saving & loading', detail: 'state_dict, checkpoint, inference mode. Production ka pehla step.', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 11', theme: 'CNNs + Transfer learning', days: [
+        { d: 'Mon', topic: 'CNN architecture', detail: 'convolution, pooling, stride, padding — visually samjho pehle', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'CNN in PyTorch', detail: 'Conv2d, MaxPool2d, full CNN class likhna', time: '2hr theory + 3hr code' },
+        { d: 'Wed', topic: 'Transfer learning', detail: 'pretrained models (ResNet, VGG), feature extraction vs fine-tuning', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Data augmentation', detail: 'torchvision transforms, why augmentation works, ImageFolder', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'CIFAR-10 project — Day 1', detail: 'Custom CNN build karo. Target: 75%+ first run.', time: '4–5hr project' },
+        { d: 'Sat', topic: 'CIFAR-10 project — Day 2', detail: 'Transfer learning se improve karo. 85%+ target. Training curves plot karo.', time: '4–5hr project' },
+      ]},
+      { label: 'Week 12', theme: 'NLP preview + revision', days: [
+        { d: 'Mon', topic: 'CIFAR-10 — finalize', detail: 'Model save, inference script, README, GitHub push. Portfolio #3.', time: '4hr project + 1hr docs' },
+        { d: 'Tue', topic: 'Text preprocessing', detail: 'tokenization, stemming, lemmatization, stopwords. NLTK basics.', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Word embeddings', detail: 'Word2Vec intuition, GloVe. Embeddings kya hote hain aur kyun kaam karte hain.', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'RNN basics', detail: 'sequence data, hidden state, vanishing gradient problem', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'LSTM intuition', detail: 'cell state, gates, why LSTM solves vanishing gradient', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'Month 3 revision', detail: 'Backprop ya CNN — jo weak lage woh dobara karo', time: '4hr revision' },
+      ]},
+    ]
+  },
+  {
+    title: 'NLP + Transformers',
+    goal: 'Yeh month AI internship ke liye sabse important hai. LLMs, transformers, prompt engineering — yahi 2025 mein AI companies maang rahi hain.',
+    project: 'Project: Sentiment analysis API — fine-tuned BERT, FastAPI wrapper, deployed on HuggingFace Spaces.',
+    weeks: [
+      { label: 'Week 13', theme: 'Attention + Transformers', days: [
+        { d: 'Mon', topic: 'Attention mechanism', detail: 'self-attention, query/key/value. 3Blue1Brown video + code implementation.', time: '2hr video + 3hr code' },
+        { d: 'Tue', topic: 'Multi-head attention', detail: 'Why multiple heads, concatenation, projection', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Positional encoding', detail: 'Why needed, sinusoidal encoding, learned embeddings', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Transformer architecture', detail: 'encoder-decoder, layer norm, FFN, residual connections', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'BERT architecture', detail: 'MLM, NSP, [CLS] token, how BERT differs from GPT', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'HuggingFace basics', detail: 'transformers library, pipeline, tokenizer, AutoModel', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 14', theme: 'Fine-tuning + Prompt Eng.', days: [
+        { d: 'Mon', topic: 'Fine-tuning BERT', detail: 'classification head, Trainer API, training args', time: '2hr theory + 3hr code' },
+        { d: 'Tue', topic: 'Fine-tuning on custom data', detail: 'IMDB dataset, custom tokenization, training loop', time: '4–5hr code' },
+        { d: 'Wed', topic: 'Prompt engineering', detail: 'zero-shot, few-shot, chain-of-thought, system prompts. Groq API.', time: '2hr theory + 2hr practice' },
+        { d: 'Thu', topic: 'RAG basics', detail: 'retrieval augmented generation — vector store, embeddings, retrieval pipeline', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'LangChain introduction', detail: 'chains, prompts, memory, document loaders', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'Mini RAG project', detail: 'PDF se Q&A system banana — basic RAG pipeline', time: '4–5hr project' },
+      ]},
+      { label: 'Week 15', theme: 'APIs + Deployment', days: [
+        { d: 'Mon', topic: 'OpenAI / Groq API deep dive', detail: 'chat completions, function calling, streaming, token management', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'FastAPI basics', detail: 'routes, pydantic models, async, middleware. ML model serve karna.', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Model deployment', detail: 'HuggingFace Spaces, Gradio, Streamlit — quick demo banana', time: '2hr + 3hr deployment' },
+        { d: 'Thu', topic: 'Sentiment API — Day 1', detail: 'Fine-tune BERT on SST-2, save model, test inference', time: '4–5hr project' },
+        { d: 'Fri', topic: 'Sentiment API — Day 2', detail: 'FastAPI wrapper, endpoints, error handling', time: '4–5hr project' },
+        { d: 'Sat', topic: 'Sentiment API — deploy', detail: 'HuggingFace Spaces deploy. Portfolio #4 — yeh sabse impressive entry hai.', time: '4hr deploy + 1hr docs' },
+      ]},
+      { label: 'Week 16', theme: 'Advanced NLP + job research', days: [
+        { d: 'Mon', topic: 'Named entity recognition', detail: 'spaCy, custom NER, token classification', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Summarization', detail: 'extractive vs abstractive, T5/BART fine-tuning basics', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Evaluation metrics for NLP', detail: 'BLEU, ROUGE, BERTScore, perplexity', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Month 4 revision', detail: 'Weakest topic — likely attention mechanism ya fine-tuning pipeline', time: '4hr revision' },
+        { d: 'Fri', topic: 'Portfolio update', detail: 'GitHub README update, all 4 projects ka short description likho', time: '3hr portfolio' },
+        { d: 'Sat', topic: 'Internship research', detail: 'Which companies hire AI interns in India. LinkedIn + Internshala dekho.', time: '2hr research' },
+      ]},
+    ]
+  },
+  {
+    title: 'MLOps + Production Skills',
+    goal: 'Models banana aata hai, ab unhe production mein lagana seekho. Yeh skill majority of AI interns mein nahi hoti — yahi tumhe alag karega.',
+    project: 'Project: End-to-end ML pipeline — data ingestion, training, versioning, CI/CD, monitoring dashboard.',
+    weeks: [
+      { label: 'Week 17', theme: 'Experiment tracking', days: [
+        { d: 'Mon', topic: 'MLflow basics', detail: 'experiment tracking, metrics logging, model registry', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'DVC — data versioning', detail: 'dvc init, dvc add, dvc push. Git for data.', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Weights & Biases', detail: 'wandb.init, logging, sweeps for hyperparameter search', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Docker basics', detail: 'Dockerfile, image, container, docker run. ML model dockerize karo.', time: '2hr theory + 3hr code' },
+        { d: 'Fri', topic: 'Docker Compose', detail: 'Multi-container setup, env variables, volumes', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'CI/CD basics', detail: 'GitHub Actions, automated testing, model validation pipeline', time: '2hr theory + 2hr code' },
+      ]},
+      { label: 'Week 18', theme: 'Serving + monitoring', days: [
+        { d: 'Mon', topic: 'REST API patterns for ML', detail: 'versioned endpoints, batch vs real-time, async inference', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Model monitoring', detail: 'data drift, concept drift, evidently AI library', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Feature stores basics', detail: 'Feast, feature engineering pipelines, offline vs online store', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Kubernetes basics', detail: 'pods, services, deployments. Sirf itna ki samajh aaye — deep dive nahi.', time: '2hr theory + 1hr practice' },
+        { d: 'Fri', topic: 'MLOps project — Day 1', detail: 'Full pipeline: data → train → track → serve → monitor', time: '4–5hr project' },
+        { d: 'Sat', topic: 'MLOps project — Day 2', detail: 'GitHub Actions CI/CD, automated retraining trigger', time: '4–5hr project' },
+      ]},
+      { label: 'Week 19', theme: 'Cloud + Scalability', days: [
+        { d: 'Mon', topic: 'AWS/GCP basics', detail: 'S3/GCS, EC2/Compute Engine, IAM. Free tier pe kaam karo.', time: '2hr theory + 2hr hands-on' },
+        { d: 'Tue', topic: 'Serverless ML', detail: 'AWS Lambda ya GCP Cloud Functions se model serve karna', time: '2hr theory + 3hr code' },
+        { d: 'Wed', topic: 'Distributed training basics', detail: 'DataParallel, DistributedDataParallel in PyTorch', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Model optimization', detail: 'quantization, pruning, ONNX export, TorchScript', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'MLOps project — finalize', detail: 'End-to-end pipeline complete. Deploy karo. Portfolio #5.', time: '4–5hr project' },
+        { d: 'Sat', topic: 'Month 5 revision', detail: 'Docker ya MLflow — jo shaky lage woh dobara', time: '3hr revision' },
+      ]},
+      { label: 'Week 20', theme: 'System design + applications', days: [
+        { d: 'Mon', topic: 'ML system design basics', detail: 'recommendation systems, search ranking, fraud detection architecture', time: '2hr theory' },
+        { d: 'Tue', topic: 'Data pipelines', detail: 'ETL, Apache Airflow basics, scheduled jobs', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Vector databases', detail: 'Pinecone, Weaviate, Chroma — similarity search, use cases', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Caching for ML', detail: 'Redis, response caching, embedding caching strategies', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'Portfolio update', detail: '5 projects ka GitHub organize karo. LinkedIn update karo.', time: '3hr portfolio' },
+        { d: 'Sat', topic: 'Internship applications start', detail: 'Resume update, cover letter template, apply to 5 companies', time: '4hr job hunt' },
+      ]},
+    ]
+  },
+  {
+    title: 'Agentic AI + Advanced LLMs',
+    goal: 'Yeh 2025 ka hottest skill hai. Agentic AI, function calling, multi-agent systems — yeh internship mein seedha kaam aata hai.',
+    project: 'Project: Autonomous research agent — web search + summarize + report generate kare, multi-tool use.',
+    weeks: [
+      { label: 'Week 21', theme: 'Agent foundations', days: [
+        { d: 'Mon', topic: 'Agent architecture', detail: 'ReAct pattern, tool use, memory types, planning loops', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'Function calling', detail: 'OpenAI function calling, tool definitions, response parsing', time: '2hr theory + 3hr code' },
+        { d: 'Wed', topic: 'LangChain agents', detail: 'AgentExecutor, tools, custom tools banana', time: '2hr theory + 3hr code' },
+        { d: 'Thu', topic: 'Memory in agents', detail: 'ConversationBufferMemory, VectorStoreMemory, summary memory', time: '2hr theory + 2hr code' },
+        { d: 'Fri', topic: 'Multi-step reasoning', detail: 'chain-of-thought prompting, self-reflection, verification', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'Agent mini project', detail: 'Simple agent jo Wikipedia search kare aur summarize kare', time: '4–5hr project' },
+      ]},
+      { label: 'Week 22', theme: 'Multi-agent systems', days: [
+        { d: 'Mon', topic: 'CrewAI basics', detail: 'agents, tasks, crews, process types', time: '2hr theory + 2hr code' },
+        { d: 'Tue', topic: 'LangGraph introduction', detail: 'stateful workflows, conditional edges, checkpointing', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Tool integration', detail: 'web search (Tavily), code execution, file operations, APIs', time: '2hr theory + 3hr code' },
+        { d: 'Thu', topic: 'Research agent — Day 1', detail: 'Define tools: search, scrape, summarize, write', time: '4–5hr project' },
+        { d: 'Fri', topic: 'Research agent — Day 2', detail: 'Multi-agent: researcher + writer + reviewer', time: '4–5hr project' },
+        { d: 'Sat', topic: 'Research agent — deploy', detail: 'Streamlit UI, HuggingFace deploy. Portfolio #6.', time: '4hr project + 1hr docs' },
+      ]},
+      { label: 'Week 23', theme: 'LoRA + local LLMs', days: [
+        { d: 'Mon', topic: 'RLHF basics', detail: 'reward models, PPO intuition, alignment concepts', time: '2hr theory' },
+        { d: 'Tue', topic: 'LoRA + PEFT', detail: 'parameter efficient fine-tuning, when to use LoRA vs full fine-tune', time: '2hr theory + 2hr code' },
+        { d: 'Wed', topic: 'Quantization deep dive', detail: '4-bit, 8-bit quantization, bitsandbytes, QLoRA', time: '2hr theory + 2hr code' },
+        { d: 'Thu', topic: 'Ollama + local LLMs', detail: 'Run Llama locally, compare models, latency benchmarking', time: '2hr setup + 2hr experiments' },
+        { d: 'Fri', topic: 'Evaluation frameworks', detail: 'LLM evaluation: HELM, LM-Eval, custom evals', time: '2hr theory + 2hr code' },
+        { d: 'Sat', topic: 'Month 6 revision', detail: 'Agentic patterns ya LoRA — jo weak lage', time: '3hr revision' },
+      ]},
+      { label: 'Week 24', theme: 'Interview prep begins', days: [
+        { d: 'Mon', topic: 'ML concepts revision', detail: 'Ek baar puri ML theory ka fast revision — bias-variance, regularization, metrics', time: '4hr revision' },
+        { d: 'Tue', topic: 'DL concepts revision', detail: 'Backprop, CNN, attention, transformers — explain karna practice karo', time: '4hr revision' },
+        { d: 'Wed', topic: 'Mock interview — technical', detail: 'Mirror ke saamne. "Explain transformer" 5 min mein. Record karo.', time: '3hr practice' },
+        { d: 'Thu', topic: 'Resume + portfolio polish', detail: '1-page resume. Har project: problem, solution, result format mein.', time: '4hr polish' },
+        { d: 'Fri', topic: 'Internship applications', detail: 'Apply 10 more companies. LinkedIn cold outreach.', time: '4hr applications' },
+        { d: 'Sat', topic: 'LeetCode — ML related', detail: 'Array, string, hashmap — AI company interviews mein yeh aate hain', time: '2hr DSA' },
+      ]},
+    ]
+  },
+  {
+    title: 'Specialization + Portfolio',
+    goal: 'Ab ek specific area choose karo jisme deep jaana hai — CV, NLP/LLMs, ya MLOps. Portfolio final form mein aana chahiye. Applications serious karo.',
+    project: 'Project: Capstone in chosen specialization — production-grade, documented, deployed, technical blog post.',
+    weeks: [
+      { label: 'Week 25–26', theme: 'Specialization deep dive', days: [
+        { d: 'Mon', topic: 'Choose: CV / NLP / MLOps', detail: 'CV: object detection (YOLO). NLP: LLM fine-tuning. MLOps: full Kubeflow pipeline.', time: 'Day 1: choice + planning' },
+        { d: 'Tue', topic: 'Core concepts study', detail: 'Chosen path ke core concepts. 2–3 relevant papers padhna seekho.', time: '4–5hr study' },
+        { d: 'Wed', topic: 'Implementation start', detail: 'Core algorithm / model implement karo. Codebase setup.', time: '4–5hr code' },
+        { d: 'Thu', topic: 'Experiment iterate', detail: 'Run experiments, note results, improve', time: '4–5hr experiments' },
+        { d: 'Fri', topic: 'Paper reading', detail: 'Abstract → intro → results → method. 2 papers per week minimum.', time: '3hr papers' },
+        { d: 'Sat', topic: 'Specialization review', detail: 'What worked, what didn\'t. Pivot if needed.', time: '2hr review' },
+      ]},
+      { label: 'Week 27', theme: 'Capstone project', days: [
+        { d: 'Mon', topic: 'Capstone — problem definition', detail: 'Real problem choose karo. Not toy dataset. Actual use case.', time: '2hr planning' },
+        { d: 'Tue', topic: 'Capstone — data pipeline', detail: 'Data collection, preprocessing, validation pipeline', time: '4–5hr code' },
+        { d: 'Wed', topic: 'Capstone — model dev', detail: 'Baseline model, experiments, tracking with MLflow/wandb', time: '4–5hr code' },
+        { d: 'Thu', topic: 'Capstone — evaluation', detail: 'Proper eval metrics, ablation study, comparison with baseline', time: '4–5hr code' },
+        { d: 'Fri', topic: 'Capstone — deployment', detail: 'API + UI + cloud deploy', time: '4–5hr deploy' },
+        { d: 'Sat', topic: 'Capstone — documentation', detail: 'Technical blog post likho. Medium ya GitHub Pages pe.', time: '4hr writing' },
+      ]},
+      { label: 'Week 28', theme: 'Interview intensive', days: [
+        { d: 'Mon', topic: 'ML system design practice', detail: 'Design a recommendation system. 45 min. requirements → data → model → serving → monitoring.', time: '3hr practice' },
+        { d: 'Tue', topic: 'Behavioral interview prep', detail: 'STAR method. "Tell me about a project", "What did you learn from failure"', time: '2hr prep + 1hr practice' },
+        { d: 'Wed', topic: 'Technical mock interview', detail: '2 mock interviews — 1 ML theory, 1 coding', time: '4hr practice' },
+        { d: 'Thu', topic: 'LinkedIn optimization', detail: 'About section, skills, featured projects. Recruiter keywords.', time: '3hr LinkedIn' },
+        { d: 'Fri', topic: 'Cold outreach', detail: '20 AI company employees / recruiters ko message karo. Template mat use karo.', time: '3hr outreach' },
+        { d: 'Sat', topic: 'Apply everywhere', detail: 'Internshala, LinkedIn, AngelList, company websites. 15+ applications.', time: '4hr applications' },
+      ]},
+    ]
+  },
+  {
+    title: 'Grind + Land the Internship',
+    goal: 'Ab sirf execute karna hai. Applications, interviews, rejections handle karna, improve karna. Ek internship pakki karo is month mein.',
+    project: 'Goal: First internship offer letter.',
+    weeks: [
+      { label: 'Week 29–30', theme: 'Interview rounds', days: [
+        { d: 'Mon', topic: 'Daily: 2 LeetCode problems', detail: 'Easy/Medium only. AI companies: arrays, strings, dynamic programming.', time: '1.5hr daily' },
+        { d: 'Tue', topic: 'Daily: 1 ML concept explain', detail: 'Record yourself explaining one concept. Watch back.', time: '30min daily' },
+        { d: 'Wed', topic: 'Daily: 1 application', detail: 'Quality over quantity. Customize every application.', time: '1hr daily' },
+        { d: 'Thu', topic: 'Interview debrief', detail: 'Har interview ke baad — kya poochha, kya galat hua, next time kya karo', time: '30min after each' },
+        { d: 'Fri', topic: 'Weak areas fix', detail: 'Jo interview mein galat hua, woh weekend pe solidify karo', time: '4hr targeted' },
+        { d: 'Sat', topic: 'New project / blog post', detail: 'Ek choti cheez banao. Continuous output stand out karta hai.', time: '4–5hr' },
+      ]},
+      { label: 'Week 31–32', theme: 'Negotiate + Prepare', days: [
+        { d: 'Mon', topic: 'Offer evaluation', detail: 'Stipend, tech stack, mentorship quality, team size — sab dekho, sirf paisa nahi', time: 'Research' },
+        { d: 'Tue', topic: 'Negotiation basics', detail: 'Counter offer karna seekho. "Can we discuss the stipend?" — sikhna zaroori hai.', time: '1hr prep' },
+        { d: 'Wed', topic: 'Pre-internship prep', detail: 'Company ka tech stack samjho. Internal tools, codebase conventions.', time: '3–4hr research' },
+        { d: 'Thu', topic: 'Set internship goals', detail: 'Month 1, 2, 3 ka kya seekhna hai — likho. Mentor se first week mein share karo.', time: '2hr planning' },
+        { d: 'Fri', topic: 'Final portfolio review', detail: 'Sab kuch ek baar check karo. GitHub, LinkedIn, resume.', time: '3hr review' },
+        { d: 'Sat', topic: 'Rest + celebrate', detail: '8 months ka kaam complete. Ek din chhuti deserve karta hai.', time: 'Off' },
+      ]},
+    ]
+  },
+];
+
+let activeMonth = 0;
+const openWeeks = {};
+const LEGACY_STORAGE_KEY = 'aiMlRoadmapCompletedTopics';
+const PROFILES_KEY = 'aiMlRoadmapProfiles';
+const ACTIVE_PROFILE_KEY = 'aiMlRoadmapActiveProfile';
+const PROGRESS_KEY_PREFIX = 'aiMlRoadmapProgress:';
+let profiles = loadProfiles();
+let activeProfileId = loadActiveProfileId();
+let completedTopics = loadCompletedTopics();
+
+function loadProfiles() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]');
+    if (Array.isArray(saved) && saved.length) return saved;
+  } catch {
+    // Fall back to the default profile.
+  }
+
+  const initial = [{ id: 'default', name: 'Abhishek' }];
+  try {
+    localStorage.setItem(PROFILES_KEY, JSON.stringify(initial));
+    const legacyProgress = localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (legacyProgress) {
+      localStorage.setItem(PROGRESS_KEY_PREFIX + 'default', legacyProgress);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    }
+  } catch {
+    // Profiles still work for this session if browser storage is unavailable.
+  }
+  return initial;
+}
+
+function loadActiveProfileId() {
+  try {
+    const savedId = localStorage.getItem(ACTIVE_PROFILE_KEY);
+    if (profiles.some(profile => profile.id === savedId)) return savedId;
+  } catch {
+    // Use the first profile.
+  }
+  return profiles[0].id;
+}
+
+function loadCompletedTopics() {
+  try {
+    return new Set(JSON.parse(
+      localStorage.getItem(PROGRESS_KEY_PREFIX + activeProfileId) || '[]'
+    ));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveCompletedTopics() {
+  try {
+    localStorage.setItem(
+      PROGRESS_KEY_PREFIX + activeProfileId,
+      JSON.stringify([...completedTopics])
+    );
+  } catch {
+    // Progress still works for this session if browser storage is unavailable.
+  }
+}
+
+function buildProfiles() {
+  const select = document.getElementById('profile-select');
+  select.innerHTML = '';
+  profiles.forEach(profile => {
+    const option = document.createElement('option');
+    option.value = profile.id;
+    option.textContent = profile.name;
+    option.selected = profile.id === activeProfileId;
+    select.appendChild(option);
+  });
+}
+
+function switchProfile(profileId) {
+  if (!profiles.some(profile => profile.id === profileId)) return;
+  activeProfileId = profileId;
+  try {
+    localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+  } catch {
+    // The selected profile still works for this session.
+  }
+  completedTopics = loadCompletedTopics();
+  buildAll();
+}
+
+function addProfile() {
+  const input = document.getElementById('profile-name');
+  const name = input.value.trim();
+  if (!name) {
+    input.focus();
+    return;
+  }
+
+  const profile = {
+    id: `user-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    name
+  };
+  profiles.push(profile);
+  activeProfileId = profile.id;
+  completedTopics = new Set();
+  input.value = '';
+
+  try {
+    localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+  } catch {
+    // The new profile remains available for this session.
+  }
+  buildAll();
+}
+
+function getTotalTopics() {
+  return months.reduce((total, month) =>
+    total + month.weeks.reduce((monthTotal, week) => monthTotal + week.days.length, 0)
+  , 0);
+}
+
+function updateProgress() {
+  const total = getTotalTopics();
+  const completed = completedTopics.size;
+  const pct = total ? Math.round((completed / total) * 100) : 0;
+  const activeProfile = profiles.find(profile => profile.id === activeProfileId);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent =
+    `${activeProfile.name}: ${completed} of ${total} topics complete — ${pct}%`;
+}
+
+function buildTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = '';
+  months.forEach((m, i) => {
+    const t = document.createElement('button');
+    t.className = 'mtab' + (i === activeMonth ? ' active' : '');
+    t.textContent = 'M' + (i + 1);
+    if (i === activeMonth) t.style.background = MONTHS_META[i].color;
+    t.onclick = () => { activeMonth = i; buildAll(); };
+    tabs.appendChild(t);
+  });
+}
+
+function buildContent() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  const m = months[activeMonth];
+  const meta = MONTHS_META[activeMonth];
+
+  const mcard = document.createElement('div');
+  mcard.className = 'month-card active';
+
+  const mhdr = document.createElement('div');
+  mhdr.className = 'month-header';
+  mhdr.style.cssText = `background:${meta.bg};border-color:${meta.border}`;
+  mhdr.innerHTML = `
+    <div class="month-num" style="color:${meta.color}">Month ${activeMonth + 1} of 8</div>
+    <div class="month-title" style="color:${meta.color}">${m.title}</div>
+    <div class="month-goal">${m.goal}</div>
+    <div class="month-project-label">Monthly project</div>
+    <div class="month-project" style="background:${meta.bg};border-color:${meta.border};color:${meta.color}">${m.project}</div>
+  `;
+  mcard.appendChild(mhdr);
+
+  m.weeks.forEach((w, wi) => {
+    const wkey = `${activeMonth}-${wi}`;
+    const block = document.createElement('div');
+    block.className = 'week-block';
+
+    const wh = document.createElement('div');
+    wh.className = 'week-header';
+    wh.innerHTML = `
+      <span class="week-dot" style="background:${meta.color}"></span>
+      <span class="week-label">${w.label}</span>
+      <span class="week-theme">${w.theme}</span>
+      <span class="week-chev${openWeeks[wkey] ? ' open' : ''}" id="chev-${wkey}">▶</span>
+    `;
+    wh.onclick = () => {
+      openWeeks[wkey] = !openWeeks[wkey];
+      document.getElementById('chev-' + wkey).classList.toggle('open', openWeeks[wkey]);
+      document.getElementById('body-' + wkey).classList.toggle('open', openWeeks[wkey]);
+    };
+    block.appendChild(wh);
+
+    const wb = document.createElement('div');
+    wb.className = 'week-body' + (openWeeks[wkey] ? ' open' : '');
+    wb.id = 'body-' + wkey;
+
+    w.days.forEach((day, di) => {
+      const topicId = `${activeMonth}-${wi}-${di}`;
+      const isCompleted = completedTopics.has(topicId);
+      const row = document.createElement('div');
+      row.className = 'day-row' + (isCompleted ? ' completed' : '');
+      row.innerHTML = `
+        <div class="day-label">${day.d}</div>
+        <div class="day-content">
+          <div class="day-content-inner">
+            <input
+              class="topic-check"
+              type="checkbox"
+              style="--topic-color:${meta.color}"
+              aria-label="Mark ${day.topic} complete"
+              ${isCompleted ? 'checked' : ''}
+            >
+            <div>
+              <div class="day-topic">${day.topic}</div>
+              <div class="day-detail">${day.detail}</div>
+              <div class="day-time">${day.time}</div>
+            </div>
+          </div>
+        </div>
+      `;
+      const checkbox = row.querySelector('.topic-check');
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) completedTopics.add(topicId);
+        else completedTopics.delete(topicId);
+        row.classList.toggle('completed', checkbox.checked);
+        saveCompletedTopics();
+        updateProgress();
+      });
+      wb.appendChild(row);
+    });
+
+    const rest = document.createElement('div');
+    rest.className = 'rest-row';
+    rest.textContent = 'Sun — Rest / buffer day. Missed topics catch up karo ya weak concept revisit karo.';
+    wb.appendChild(rest);
+
+    block.appendChild(wb);
+    mcard.appendChild(block);
+  });
+
+  main.appendChild(mcard);
+
+  updateProgress();
+}
+
+function buildAll() {
+  buildProfiles();
+  buildTabs();
+  buildContent();
+}
+
+document.getElementById('profile-select').addEventListener('change', event => {
+  switchProfile(event.target.value);
+});
+document.getElementById('profile-add').addEventListener('click', addProfile);
+document.getElementById('profile-name').addEventListener('keydown', event => {
+  if (event.key === 'Enter') addProfile();
+});
+
+buildAll();
+</script>
+</body>
+</html>
